@@ -6,7 +6,7 @@
         <v-row dense>
           <v-col cols="12" v-if="!!news">
             <v-card class="mx-auto" max-width="500">
-              <v-img :src="news.urlToImage" height="200px" cover></v-img>
+              <v-img :src="news.urlToImage" cover></v-img>
 
               <v-card-title>
                 {{ news.title }}
