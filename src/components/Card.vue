@@ -7,7 +7,9 @@
       cover
     >
       <v-card-title class="normal-white-space translucent">
-        {{ props.data.title }}
+        <div class="banner">
+          {{ props.data.title }}
+        </div>
         <div>
           <v-btn
             color="purple"
