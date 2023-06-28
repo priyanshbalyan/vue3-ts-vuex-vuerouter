@@ -3,6 +3,7 @@ export interface ApplicationState {
   error: string | null;
   isLoading: boolean;
   sources: { id: string; name: string }[];
+  visited: string[];
 }
 
 export interface ApiResponse {

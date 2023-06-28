@@ -2,7 +2,11 @@
   <v-dialog v-model="open" fullScreen>
     <v-card>
       <v-card-text>
-        <v-textarea label="New Title" v-model="editTitle"></v-textarea>
+        <v-textarea
+          label="New Title"
+          v-model="editTitle"
+          :rules="[counter]"
+        ></v-textarea>
       </v-card-text>
       <v-card-actions>
         <v-btn color="warning" block @click="editHeadline">
@@ -22,6 +26,8 @@ interface Props {
   item: string;
 }
 
+const MAX_LENGTH = 255;
+
 const props = defineProps<Props>();
 const emit = defineEmits<{
   (e: "close"): void;
@@ -33,12 +39,17 @@ const open = computed<boolean>(() => !!props.item);
 const editTitle = ref("");
 
 const editHeadline = () => {
-  store.dispatch(UPDATE_HEADLINE, {
-    text: props.item,
-    newText: editTitle.value,
-  });
-  emit("close");
+  if (editTitle.value.length <= MAX_LENGTH) {
+    store.dispatch(UPDATE_HEADLINE, {
+      text: props.item,
+      newText: editTitle.value,
+    });
+    emit("close");
+  }
 };
+
+const counter = (value) =>
+  value.length <= MAX_LENGTH || `Max ${MAX_LENGTH} characters`;
 
 watch(
   () => props.item,

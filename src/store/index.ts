@@ -15,6 +15,7 @@ const store = createStore({
     sources: [],
     error: null,
     isLoading: false,
+    visited: [],
   },
   getters,
   mutations,
