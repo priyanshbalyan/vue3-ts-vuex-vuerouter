@@ -14,4 +14,7 @@ export const getters = {
   getSources(state: ApplicationState): Source[] {
     return state.sources;
   },
+  getVisited(state: ApplicationState): string[] {
+    return state.visited;
+  },
 };

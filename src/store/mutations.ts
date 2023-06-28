@@ -7,6 +7,7 @@ import {
   SET_NEWS,
   SET_SOURCES,
   UPDATE_HEADLINE,
+  UPDATE_VISITED,
 } from "@store/events";
 
 export const mutations = {
@@ -33,5 +34,9 @@ export const mutations = {
       return newsItem;
     });
     state.news = [...updatedNews];
+  },
+  [UPDATE_VISITED](state: ApplicationState, payload: string) {
+    const items = [...state.visited, payload];
+    state.visited = [...new Set(items)];
   },
 };

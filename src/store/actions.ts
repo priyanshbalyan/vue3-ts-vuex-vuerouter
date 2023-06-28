@@ -8,6 +8,7 @@ import {
   FETCH_SOURCES,
   FETCH_WRONG_CALL,
   UPDATE_HEADLINE,
+  UPDATE_VISITED,
 } from "@store/events";
 import { getNews, getSources, getWrongApiCall } from "@services/api";
 import { Payload } from "@interfaces";
@@ -46,5 +47,8 @@ export const actions = {
   },
   [UPDATE_HEADLINE]({ commit }, payload: Payload) {
     commit(UPDATE_HEADLINE, payload);
+  },
+  [UPDATE_VISITED]({ commit }, payload: string) {
+    commit(UPDATE_VISITED, payload);
   },
 };

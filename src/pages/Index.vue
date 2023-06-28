@@ -4,10 +4,11 @@
     <v-main>
       <v-container fluid>
         <v-row dense>
-          <v-col cols="6">
+          <v-col sm="4" cols="12">
             <v-text-field
+              variant="outlined"
+              rounded="xl"
               density="compact"
-              variant="solo"
               label="Search"
               append-inner-icon="mdi-magnify"
               single-line
@@ -16,22 +17,41 @@
               @input="onInput"
             ></v-text-field>
           </v-col>
-          <v-col cols="6">
+          <v-col sm="4" cols="12">
             <v-select
+              variant="outlined"
+              rounded="xl"
               clearable
               label="Select Source"
-              variant="solo"
               single-line
               density="compact"
               :items="sources"
               v-model="selectedFilter"
-            ></v-select>
+            >
+            </v-select>
+          </v-col>
+          <v-col sm="4" cols="12">
+            <v-btn variant="outlined" size="large" block @click="onApiCall">
+              Wrong api call
+            </v-btn>
           </v-col>
         </v-row>
-        <v-row dense class="ml-1 mr-1">
-          <v-btn block @click="onApiCall" class="mb-4">Wrong api call</v-btn>
-        </v-row>
         <v-row dense>
+          <v-col>
+            <div v-if="getVisited.length">
+              <v-list density="compact">
+                <v-list-subheader>Visited</v-list-subheader>
+                <v-list-item
+                  v-for="(item, i) in getVisited"
+                  :key="i"
+                  :value="item"
+                  color="primary"
+                >
+                  <v-list-item-title v-text="item"></v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </div>
+          </v-col>
           <v-col
             v-if="selectedFilter && getNews.length === 0"
             cols="12"
@@ -47,15 +67,13 @@
           <v-col
             v-else
             v-if="!isLoading"
-            v-for="news in getNews"
+            v-for="(news, index) in getNews"
             :key="news.url"
-            cols="6"
+            lg="3"
+            md="4"
+            sm="6"
           >
-            <Card
-              :data="news"
-              @onExplore="onCardExplore"
-              @onEdit="onCardEdit(news)"
-            />
+            <Card :data="news" :index="index" @onEdit="onCardEdit(news)" />
           </v-col>
         </v-row>
       </v-container>
@@ -74,10 +92,8 @@ import Dialog from "@components/Dialog.vue";
 import EditDialog from "@components/EditDialog.vue";
 import AppBar from "@components/AppBar.vue";
 import { Source, Article } from "@interfaces";
-import { useRouter } from "vue-router";
 
 const store = useStore(key);
-const router = useRouter();
 
 const searchText = ref<string>("");
 const selectedFilter = ref<string | null>(null);
@@ -91,16 +107,15 @@ const getNews = computed<Article[]>(() => {
   }
   return store.getters.getNews;
 });
+const getVisited = computed<string[]>(() => {
+  return store.getters.getVisited;
+});
 const sources = computed<string[]>(() => {
   return store.getters.getSources.map((source: Source) => source.name);
 });
 const isLoading = computed<boolean>(() => {
   return store.getters.getLoading;
 });
-
-const onCardExplore = () => {
-  router.push({ name: "detail", params: { id: "1" } });
-};
 
 const onInput = () => {
   store.dispatch(FETCH_NEWS, searchText.value);
@@ -119,7 +134,11 @@ const onEditClose = () => {
 };
 
 onMounted(() => {
-  store.dispatch(FETCH_NEWS);
-  store.dispatch(FETCH_SOURCES);
+  if (!sources.value.length) {
+    store.dispatch(FETCH_SOURCES);
+  }
+  if (!getNews.value.length) {
+    store.dispatch(FETCH_NEWS);
+  }
 });
 </script>
