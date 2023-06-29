@@ -1,17 +1,17 @@
 import { RouteRecordRaw } from "vue-router";
-import Index from "@pages/Index.vue";
-import Detail from "@pages/Detail.vue";
+import IndexPage from "@pages/IndexPage.vue";
+import DetailPage from "@pages/DetailPage.vue";
 
 const routes: RouteRecordRaw[] = [
   {
     path: "/",
     name: "Home",
-    component: Index,
+    component: IndexPage,
   },
   {
     path: "/detail/:id",
     name: "Detail",
-    component: Detail,
+    component: DetailPage,
   },
 ];
 

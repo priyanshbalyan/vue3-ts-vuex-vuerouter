@@ -1,16 +1,26 @@
-export interface ApplicationState {
-  news: Article[];
-  error: string | null;
-  isLoading: boolean;
-  sources: { id: string; name: string }[];
-  visited: string[];
-}
-
 export interface ApiResponse {
   status: string;
   totalResults: number;
   articles?: Article[];
   sources?: Source[];
+}
+
+export interface ApplicationState {
+  news: Article[];
+  error: string | null;
+  isLoading: boolean;
+  sources: { id: string; name: string }[];
+  visited: VisitedLink[];
+}
+
+export interface VisitedLink {
+  title: string;
+  link: string;
+}
+
+export interface ArticleSource {
+  id: string;
+  name: string;
 }
 
 export interface Article {

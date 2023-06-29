@@ -1,5 +1,10 @@
-import { ApplicationState } from "@store/index";
-import { Article, Source, Payload } from "@interfaces";
+import {
+  Article,
+  Source,
+  Payload,
+  ApplicationState,
+  VisitedLink,
+} from "@interfaces";
 import {
   SET_ERROR,
   CLEAR_ERROR,
@@ -35,7 +40,7 @@ export const mutations = {
     });
     state.news = [...updatedNews];
   },
-  [UPDATE_VISITED](state: ApplicationState, payload: string) {
+  [UPDATE_VISITED](state: ApplicationState, payload: VisitedLink) {
     const items = [...state.visited, payload];
     state.visited = [...new Set(items)];
   },

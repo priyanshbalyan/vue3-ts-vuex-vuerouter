@@ -64,12 +64,16 @@ const itemId = computed<string>(() => route.params.id as string);
 
 const news = computed<Article | null>(() => {
   if (itemId.value) return store.getters.getNews[itemId.value];
+  return null;
 });
 
 onMounted(() => {
   if (!news.value) router.push("/");
   else {
-    store.dispatch(UPDATE_VISITED, news.value?.title);
+    store.dispatch(UPDATE_VISITED, {
+      title: news.value?.title,
+      link: itemId.value,
+    });
   }
 });
 </script>

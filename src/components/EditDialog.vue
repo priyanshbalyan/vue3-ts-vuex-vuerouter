@@ -29,9 +29,7 @@ interface Props {
 const MAX_LENGTH = 255;
 
 const props = defineProps<Props>();
-const emit = defineEmits<{
-  (e: "close"): void;
-}>();
+const emit = defineEmits<{ (e: "close"): void }>();
 
 const store = useStore(key);
 
