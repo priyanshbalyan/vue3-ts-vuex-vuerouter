@@ -11,7 +11,7 @@ import {
   UPDATE_VISITED,
 } from "@store/events";
 import { getNews, getSources, getWrongApiCall } from "@services/api";
-import { Payload } from "@interfaces";
+import { Payload, VisitedLink } from "@interfaces";
 
 export const actions = {
   async [FETCH_NEWS]({ commit }, payload?: string) {
@@ -48,7 +48,7 @@ export const actions = {
   [UPDATE_HEADLINE]({ commit }, payload: Payload) {
     commit(UPDATE_HEADLINE, payload);
   },
-  [UPDATE_VISITED]({ commit }, payload: string) {
+  [UPDATE_VISITED]({ commit }, payload: VisitedLink) {
     commit(UPDATE_VISITED, payload);
   },
 };

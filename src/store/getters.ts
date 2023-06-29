@@ -1,5 +1,9 @@
-import { ApplicationState } from "@store";
-import { Article, Source } from "@interfaces";
+import {
+  Article,
+  ApplicationState,
+  ArticleSource,
+  VisitedLink,
+} from "@interfaces";
 
 export const getters = {
   getNews(state: ApplicationState): Article[] {
@@ -11,10 +15,10 @@ export const getters = {
   getLoading(state: ApplicationState): boolean {
     return state.isLoading;
   },
-  getSources(state: ApplicationState): Source[] {
+  getSources(state: ApplicationState): ArticleSource[] {
     return state.sources;
   },
-  getVisited(state: ApplicationState): string[] {
+  getVisited(state: ApplicationState): VisitedLink[] {
     return state.visited;
   },
 };

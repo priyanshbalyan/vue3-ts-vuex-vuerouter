@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/no-v-text-v-html-on-component -->
 <template>
   <v-layout>
     <AppBar />
@@ -38,19 +39,7 @@
         </v-row>
         <v-row dense>
           <v-col>
-            <div v-if="getVisited.length">
-              <v-list density="compact">
-                <v-list-subheader>Visited</v-list-subheader>
-                <v-list-item
-                  v-for="(item, i) in getVisited"
-                  :key="i"
-                  :value="item"
-                  color="primary"
-                >
-                  <v-list-item-title v-text="item"></v-list-item-title>
-                </v-list-item>
-              </v-list>
-            </div>
+            <VisitedLinks :links="visited" />
           </v-col>
           <v-col
             v-if="selectedFilter && getNews.length === 0"
@@ -66,19 +55,22 @@
           </v-col>
           <v-col
             v-else
-            v-if="!isLoading"
             v-for="(news, index) in getNews"
             :key="news.url"
             lg="3"
             md="4"
             sm="6"
           >
-            <Card :data="news" :index="index" @onEdit="onCardEdit(news)" />
+            <CardComponent
+              :data="news"
+              :index="index"
+              @onEdit="onCardEdit(news)"
+            />
           </v-col>
         </v-row>
       </v-container>
     </v-main>
-    <Dialog />
+    <DialogComponent />
     <EditDialog :item="selectedItem" @close="onEditClose" />
   </v-layout>
 </template>
@@ -87,11 +79,12 @@ import { onMounted, computed, ref } from "vue";
 import { FETCH_NEWS, FETCH_SOURCES, FETCH_WRONG_CALL } from "@store/events";
 import { key } from "@store";
 import { useStore } from "vuex";
-import Card from "@components/Card.vue";
-import Dialog from "@components/Dialog.vue";
+import CardComponent from "@components/CardComponent.vue";
+import DialogComponent from "@components/DialogComponent.vue";
 import EditDialog from "@components/EditDialog.vue";
 import AppBar from "@components/AppBar.vue";
-import { Source, Article } from "@interfaces";
+import { Source, Article, VisitedLink } from "@interfaces";
+import VisitedLinks from "@components/VisitedLinks.vue";
 
 const store = useStore(key);
 
@@ -107,7 +100,7 @@ const getNews = computed<Article[]>(() => {
   }
   return store.getters.getNews;
 });
-const getVisited = computed<string[]>(() => {
+const visited = computed<VisitedLink[]>(() => {
   return store.getters.getVisited;
 });
 const sources = computed<string[]>(() => {

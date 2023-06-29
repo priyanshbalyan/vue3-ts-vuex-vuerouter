@@ -34,9 +34,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits<{
-  (e: "onEdit"): void;
-}>();
+const emit = defineEmits<{ (e: "onEdit"): void }>();
 
 const onEditClick = () => emit("onEdit");
 </script>
