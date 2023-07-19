@@ -26,7 +26,7 @@
   </v-card>
 </template>
 <script setup lang="ts">
-import { Article } from "@interfaces";
+import { Article } from '@interfaces';
 
 interface Props {
   data: Article;
@@ -34,7 +34,7 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-const emit = defineEmits<{ (e: "onEdit"): void }>();
+const emit = defineEmits<{ (e: 'onEdit'): void }>();
 
-const onEditClick = () => emit("onEdit");
+const onEditClick = () => emit('onEdit');
 </script>

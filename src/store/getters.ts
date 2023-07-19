@@ -1,24 +1,24 @@
 import {
-  Article,
-  ApplicationState,
-  ArticleSource,
-  VisitedLink,
-} from "@interfaces";
+  type Article,
+  type ApplicationState,
+  type ArticleSource,
+  type VisitedLink
+} from '@interfaces'
 
 export const getters = {
-  getNews(state: ApplicationState): Article[] {
-    return state.news;
+  getNews (state: ApplicationState): Article[] {
+    return state.news
   },
-  getError(state: ApplicationState): string | null {
-    return state.error;
+  getError (state: ApplicationState): string | null {
+    return state.error
   },
-  getLoading(state: ApplicationState): boolean {
-    return state.isLoading;
+  getLoading (state: ApplicationState): boolean {
+    return state.isLoading
   },
-  getSources(state: ApplicationState): ArticleSource[] {
-    return state.sources;
+  getSources (state: ApplicationState): ArticleSource[] {
+    return state.sources
   },
-  getVisited(state: ApplicationState): VisitedLink[] {
-    return state.visited;
-  },
-};
+  getVisited (state: ApplicationState): VisitedLink[] {
+    return state.visited
+  }
+}

@@ -1,10 +1,10 @@
 import {
-  Article,
-  Source,
-  Payload,
-  ApplicationState,
-  VisitedLink,
-} from "@interfaces";
+  type Article,
+  type Source,
+  type Payload,
+  type ApplicationState,
+  type VisitedLink
+} from '@interfaces'
 import {
   SET_ERROR,
   CLEAR_ERROR,
@@ -12,36 +12,36 @@ import {
   SET_NEWS,
   SET_SOURCES,
   UPDATE_HEADLINE,
-  UPDATE_VISITED,
-} from "@store/events";
+  UPDATE_VISITED
+} from '@store/events'
 
 export const mutations = {
-  [SET_NEWS](state: ApplicationState, payload: Article[]) {
-    state.news = payload;
+  [SET_NEWS] (state: ApplicationState, payload: Article[]) {
+    state.news = payload
   },
-  [SET_SOURCES](state: ApplicationState, payload: Source[]) {
-    state.sources = payload;
+  [SET_SOURCES] (state: ApplicationState, payload: Source[]) {
+    state.sources = payload
   },
-  [SET_ERROR](state: ApplicationState, error: string) {
-    state.error = error;
+  [SET_ERROR] (state: ApplicationState, error: string) {
+    state.error = error
   },
-  [CLEAR_ERROR](state: ApplicationState) {
-    state.error = null;
+  [CLEAR_ERROR] (state: ApplicationState) {
+    state.error = null
   },
-  [SET_LOADING](state: ApplicationState, payload: boolean) {
-    state.isLoading = payload;
+  [SET_LOADING] (state: ApplicationState, payload: boolean) {
+    state.isLoading = payload
   },
-  [UPDATE_HEADLINE](state: ApplicationState, payload: Payload) {
+  [UPDATE_HEADLINE] (state: ApplicationState, payload: Payload) {
     const updatedNews = state.news.map((newsItem) => {
       if (newsItem.title === payload.text) {
-        newsItem.title = payload.newText;
+        newsItem.title = payload.newText
       }
-      return newsItem;
-    });
-    state.news = [...updatedNews];
+      return newsItem
+    })
+    state.news = [...updatedNews]
   },
-  [UPDATE_VISITED](state: ApplicationState, payload: VisitedLink) {
-    const items = [...state.visited, payload];
-    state.visited = [...new Set(items)];
-  },
-};
+  [UPDATE_VISITED] (state: ApplicationState, payload: VisitedLink) {
+    const items = [...state.visited, payload]
+    state.visited = [...new Set(items)]
+  }
+}

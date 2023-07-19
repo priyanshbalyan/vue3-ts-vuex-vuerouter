@@ -1,25 +1,25 @@
-import { createApp } from "vue";
+import { createApp } from 'vue'
 
-import App from "@App.vue";
-import router from "@router/index";
-import store, { key } from "@store/index";
+import App from '@App.vue'
+import router from '@router/index'
+import store, { key } from '@store/index'
 
-import "@style.scss";
+import '@style.scss'
 
 // Vuetify
-import "vuetify/styles";
-import { createVuetify } from "vuetify";
-import * as components from "vuetify/components";
-import * as directives from "vuetify/directives";
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
 
 const vuetify = createVuetify({
   components,
-  directives,
-});
+  directives
+})
 
-const app = createApp(App);
-app.use(router);
-app.use(vuetify);
-app.use(store, key);
+const app = createApp(App)
+app.use(router)
+app.use(vuetify)
+app.use(store, key)
 
-app.mount("#app");
+app.mount('#app')
